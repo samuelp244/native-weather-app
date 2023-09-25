@@ -1,20 +1,44 @@
-import { StatusBar } from "expo-status-bar";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import WeatherDetails from "./src/screens/WeatherDetails";
+import { SafeAreaView } from "react-native";
 
-export default function App() {
+const Tab = createMaterialTopTabNavigator();
+
+const App = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style='auto' />
+    <SafeAreaView style={{ flex: 1 }}>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen
+            name='WeatherDetails1'
+            children={() => (
+              <WeatherDetails
+                route={{
+                  key: "1",
+                  name: "WeatherDetails",
+                  params: { q: "Bangalore" },
+                }}
+              />
+            )}
+          />
+          <Tab.Screen
+            name='WeatherDetails2'
+            children={() => (
+              <WeatherDetails
+                route={{
+                  key: "1",
+                  name: "WeatherDetails",
+                  params: { q: "Paris" },
+                }}
+              />
+            )}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
     </SafeAreaView>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+};
+// Bangalore
+export default App;
